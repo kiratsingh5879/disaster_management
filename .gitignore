@@ -1,0 +1,37 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Env files
+.env
+**/.env
+.env.local
+**/.env.local
+
+# Builds
+build/
+dist/
+coverage/
+.tmp/
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Expo/React Native
+.expo/
+.expo-shared/
+
+# Misc
+.vercel/
+.netlify/
+.next/

@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  backend:
+    build: .
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo:27017/reliefdb
+      - JWT_SECRET=change_me
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:19006
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+volumes:
+  mongo-data: {}
