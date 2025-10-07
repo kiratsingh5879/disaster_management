@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import axios from 'axios'
+import io from 'socket.io-client'
 
 export default function Reports(){
   const [reports, setReports] = useState([])
@@ -9,6 +10,10 @@ export default function Reports(){
   useEffect(() => {
     const base = import.meta.env.VITE_API_BASE
     axios.get(base + '/api/reports').then(r => setReports(r.data.data)).catch(()=>{})
+    const sock = io(base, { transports: ['websocket', 'polling'] })
+    sock.on('report:new', ({ report }) => setReports(prev => [report, ...prev].slice(0, 500)))
+    sock.on('report:verify', ({ reportId, verified }) => setReports(prev => prev.map(r => r._id === reportId ? { ...r, status: verified ? 'verified' : 'unverified' } : r)))
+    return () => sock.close()
   }, [])
 
   return (

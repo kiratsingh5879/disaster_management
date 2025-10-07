@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard from './pages/Dashboard.jsx'
 import Reports from './pages/Reports.jsx'
 import Login from './pages/Login.jsx'
+import Moderation from './pages/Moderation.jsx'
+import Volunteers from './pages/Volunteers.jsx'
+import Resources from './pages/Resources.jsx'
 
 const qc = new QueryClient()
 
@@ -20,6 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard/>} />
           <Route path="/reports" element={<Reports/>} />
+          <Route path="/moderation" element={<Moderation/>} />
+          <Route path="/volunteers" element={<Volunteers/>} />
+          <Route path="/resources" element={<Resources/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>

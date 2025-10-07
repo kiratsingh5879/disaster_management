@@ -9,6 +9,17 @@ export async function createTask(req, res, next) {
   } catch (err) { next(err); }
 }
 
+export async function listTasks(req, res, next) {
+  try {
+    const { status, volunteerId } = req.query
+    const q = {}
+    if (status) q.status = status
+    if (volunteerId) q.volunteerId = volunteerId
+    const tasks = await Task.find(q).sort({ createdAt: -1 }).limit(200)
+    res.json({ data: tasks, meta: { timestamp: new Date().toISOString() } })
+  } catch (err) { next(err) }
+}
+
 export async function claimTask(req, res, next) {
   try {
     const { id } = req.params;

@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { createTask, claimTask, completeTask } from '../controllers/taskController.js';
+import { createTask, claimTask, completeTask, listTasks } from '../controllers/taskController.js';
 import { validate } from '../middleware/validate.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 
 const router = Router();
+
+router.get('/', requireAuth, requireRole('ADMIN', 'MODERATOR', 'VOLUNTEER'), listTasks);
 
 router.post('/', requireAuth, requireRole('ADMIN', 'MODERATOR'), [
   body('reportId').isMongoId(),

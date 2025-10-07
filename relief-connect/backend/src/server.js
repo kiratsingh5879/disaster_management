@@ -15,6 +15,8 @@ import volunteerRoutes from './routes/volunteerRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import resourceRoutes from './routes/resourceRoutes.js';
 import smsRoutes from './routes/smsRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import recommendationRoutes from './routes/recommendationRoutes.js';
 
 import { Server as SocketIOServer } from 'socket.io';
 import { setupSockets } from './sockets/index.js';
@@ -48,6 +50,8 @@ app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api', smsRoutes);
 app.use('/api/resources', resourceRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/recommend', recommendationRoutes);
 
 app.use(errorHandler);
 
